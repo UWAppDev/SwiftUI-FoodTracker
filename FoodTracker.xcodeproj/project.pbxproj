@@ -15,6 +15,7 @@
 		0E8575AF245AFBD500C5F287 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E8575AD245AFBD500C5F287 /* LaunchScreen.storyboard */; };
 		0E8575BA245AFBD500C5F287 /* FoodTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8575B9245AFBD500C5F287 /* FoodTrackerTests.swift */; };
 		0E8575C6245AFF6600C5F287 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0E8575C5245AFF6600C5F287 /* Introspect */; };
+		A03098CC2467BBA20007CB25 /* SupportingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03098CB2467BBA20007CB25 /* SupportingViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		0E8575B5245AFBD500C5F287 /* FoodTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8575B9245AFBD500C5F287 /* FoodTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerTests.swift; sourceTree = "<group>"; };
 		0E8575BB245AFBD500C5F287 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A03098CB2467BBA20007CB25 /* SupportingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				0E8575A2245AFBD500C5F287 /* AppDelegate.swift */,
 				0E8575A4245AFBD500C5F287 /* SceneDelegate.swift */,
 				0E8575A6245AFBD500C5F287 /* ContentView.swift */,
+				A03098CB2467BBA20007CB25 /* SupportingViews.swift */,
 				0E8575A8245AFBD500C5F287 /* Assets.xcassets */,
 				0E8575AD245AFBD500C5F287 /* LaunchScreen.storyboard */,
 				0E8575B0245AFBD500C5F287 /* Info.plist */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E8575A3245AFBD500C5F287 /* AppDelegate.swift in Sources */,
+				A03098CC2467BBA20007CB25 /* SupportingViews.swift in Sources */,
 				0E8575A5245AFBD500C5F287 /* SceneDelegate.swift in Sources */,
 				0E8575A7245AFBD500C5F287 /* ContentView.swift in Sources */,
 			);
@@ -374,6 +378,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FoodTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -393,6 +398,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FoodTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

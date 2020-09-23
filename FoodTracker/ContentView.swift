@@ -10,18 +10,21 @@ import SwiftUI
 import Introspect
 
 struct ContentView: View {
+    @State var mealName: String = ""
+    @State var mealRating: Int = 4
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
             Text("Meal Name")
-            TextField("Enter meal name", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+            TextField("Enter meal name", text: $mealName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .introspectTextField { (textField) in
                     textField.returnKeyType = .done
                     textField.enablesReturnKeyAutomatically = true
             }
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            Button(action: {self.mealName = "Untitled Meal"}) {
                 Text("Set Default Label Text")
             }
+            RatingStars(rating: $mealRating)
             Spacer()
         }
         .padding(.all)
