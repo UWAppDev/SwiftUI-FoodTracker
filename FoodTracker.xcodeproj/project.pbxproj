@@ -16,6 +16,7 @@
 		0E8575BA245AFBD500C5F287 /* FoodTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8575B9245AFBD500C5F287 /* FoodTrackerTests.swift */; };
 		0E8575C6245AFF6600C5F287 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0E8575C5245AFF6600C5F287 /* Introspect */; };
 		A03098CC2467BBA20007CB25 /* SupportingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03098CB2467BBA20007CB25 /* SupportingViews.swift */; };
+		D2C66F37253A327800084A20 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C66F36253A327800084A20 /* Meal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		0E8575B9245AFBD500C5F287 /* FoodTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerTests.swift; sourceTree = "<group>"; };
 		0E8575BB245AFBD500C5F287 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03098CB2467BBA20007CB25 /* SupportingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingViews.swift; sourceTree = "<group>"; };
+		D2C66F36253A327800084A20 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				0E8575A4245AFBD500C5F287 /* SceneDelegate.swift */,
 				0E8575A6245AFBD500C5F287 /* ContentView.swift */,
 				A03098CB2467BBA20007CB25 /* SupportingViews.swift */,
+				D2C66F36253A327800084A20 /* Meal.swift */,
 				0E8575A8245AFBD500C5F287 /* Assets.xcassets */,
 				0E8575AD245AFBD500C5F287 /* LaunchScreen.storyboard */,
 				0E8575B0245AFBD500C5F287 /* Info.plist */,
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C66F37253A327800084A20 /* Meal.swift in Sources */,
 				0E8575A3245AFBD500C5F287 /* AppDelegate.swift in Sources */,
 				A03098CC2467BBA20007CB25 /* SupportingViews.swift in Sources */,
 				0E8575A5245AFBD500C5F287 /* SceneDelegate.swift in Sources */,
