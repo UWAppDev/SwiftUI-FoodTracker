@@ -2,7 +2,6 @@
 //  SupportingViews.swift
 //  FoodTracker
 //
-//  Created by Lucas Wang on 2020-05-09.
 //  Copyright © 2020 UWAppDev. All rights reserved.
 //
 
