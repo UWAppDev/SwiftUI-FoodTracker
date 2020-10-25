@@ -12,10 +12,15 @@ import SwiftUI
 /// However, because we want to have additional checks for meals, we have to write one ourselves.
 struct Meal {
     var name: String
-    var photo: Image?
     var rating: Int
+    var photo: Image?
 
-    init?(name: String, photo: Image?, rating: Int) {
+    /// Constructs an instance of a meal.
+    /// - Parameters:
+    ///   - name: the name of the meal, must not be empty.
+    ///   - rating: an integer between 0 and 5, inclusive.
+    ///   - photo: an optional image. Defaults to `nil`.
+    init?(name: String, rating: Int, photo: Image? = nil) {
         // The name must not be empty.
         // This is the same as saying:
         //

@@ -9,21 +9,20 @@ import SwiftUI
 import Introspect
 
 struct ContentView: View {
-    @State var mealName: String = ""
-    @State var mealRating: Int = 4
+    @State var meal: Meal = Meal(name: "Untitled Meal", rating: 4)!
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
             Text("Meal Name")
-            TextField("Enter meal name", text: $mealName)
+            TextField("Enter meal name", text: $meal.name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .introspectTextField { (textField) in
                     textField.returnKeyType = .done
                     textField.enablesReturnKeyAutomatically = true
             }
-            Button(action: {self.mealName = "Untitled Meal"}) {
+            Button(action: { self.meal.name = "Untitled Meal" }) {
                 Text("Set Default Label Text")
             }
-            RatingStars(rating: $mealRating)
+            RatingStars(rating: $meal.rating)
             Spacer()
         }
         .padding(.all)
