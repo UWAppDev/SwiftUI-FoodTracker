@@ -38,7 +38,7 @@ struct Meal {
         //
         //     guard (0...5).contains(rating)
         //
-        // like what we did in RatingStars.
+        // like what we did in `RatingStars`.
         guard (rating >= 0) && (rating <= 5) else {
             return nil
         }
