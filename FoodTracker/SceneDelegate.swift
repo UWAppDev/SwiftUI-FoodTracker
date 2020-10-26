@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  FoodTracker
 //
-//  Created by Mobile Development Club on 4/30/20.
 //  Copyright © 2020 UWAppDev. All rights reserved.
 //
 
