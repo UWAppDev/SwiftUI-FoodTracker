@@ -10,7 +10,10 @@ import SwiftUI
 
 /// `struct`s get a default initializer that allows you to initalize each variable with some value.
 /// However, because we want to have additional checks for meals, we have to write one ourselves.
-struct Meal {
+struct Meal: Identifiable {
+    //In order for meals to be enumerated through a List, a Universally Unique IDentifier is required for each meal
+    let id = UUID()
+    
     var name: String
     var rating: Int
     var photo: Image?

@@ -45,7 +45,7 @@ struct RatingStars: View {
     }
 }
 
-struct SupportingViews_Previews: PreviewProvider {
+struct RatingStars_Previews: PreviewProvider {
     static var previews: some View {
         RatingStars(rating: .constant(0))
     }

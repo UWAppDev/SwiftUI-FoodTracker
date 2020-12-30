@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		0E8575A3245AFBD500C5F287 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8575A2245AFBD500C5F287 /* AppDelegate.swift */; };
 		0E8575A5245AFBD500C5F287 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8575A4245AFBD500C5F287 /* SceneDelegate.swift */; };
-		0E8575A7245AFBD500C5F287 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8575A6245AFBD500C5F287 /* ContentView.swift */; };
+		0E8575A7245AFBD500C5F287 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8575A6245AFBD500C5F287 /* MealView.swift */; };
 		0E8575A9245AFBD500C5F287 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8575A8245AFBD500C5F287 /* Assets.xcassets */; };
 		0E8575AC245AFBD500C5F287 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8575AB245AFBD500C5F287 /* Preview Assets.xcassets */; };
 		0E8575AF245AFBD500C5F287 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E8575AD245AFBD500C5F287 /* LaunchScreen.storyboard */; };
 		0E8575BA245AFBD500C5F287 /* FoodTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8575B9245AFBD500C5F287 /* FoodTrackerTests.swift */; };
 		0E8575C6245AFF6600C5F287 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0E8575C5245AFF6600C5F287 /* Introspect */; };
-		A03098CC2467BBA20007CB25 /* SupportingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03098CB2467BBA20007CB25 /* SupportingViews.swift */; };
+		A01BCBC1259D199A00A37D1A /* MealListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01BCBC0259D199A00A37D1A /* MealListView.swift */; };
+		A03098CC2467BBA20007CB25 /* RatingStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03098CB2467BBA20007CB25 /* RatingStars.swift */; };
 		D2C66F37253A327800084A20 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C66F36253A327800084A20 /* Meal.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +34,7 @@
 		0E85759F245AFBD500C5F287 /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8575A2245AFBD500C5F287 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E8575A4245AFBD500C5F287 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0E8575A6245AFBD500C5F287 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0E8575A6245AFBD500C5F287 /* MealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
 		0E8575A8245AFBD500C5F287 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E8575AB245AFBD500C5F287 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E8575AE245AFBD500C5F287 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,7 +42,8 @@
 		0E8575B5245AFBD500C5F287 /* FoodTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8575B9245AFBD500C5F287 /* FoodTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerTests.swift; sourceTree = "<group>"; };
 		0E8575BB245AFBD500C5F287 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A03098CB2467BBA20007CB25 /* SupportingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingViews.swift; sourceTree = "<group>"; };
+		A01BCBC0259D199A00A37D1A /* MealListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListView.swift; sourceTree = "<group>"; };
+		A03098CB2467BBA20007CB25 /* RatingStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStars.swift; sourceTree = "<group>"; };
 		D2C66F36253A327800084A20 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,8 +89,9 @@
 			children = (
 				0E8575A2245AFBD500C5F287 /* AppDelegate.swift */,
 				0E8575A4245AFBD500C5F287 /* SceneDelegate.swift */,
-				0E8575A6245AFBD500C5F287 /* ContentView.swift */,
-				A03098CB2467BBA20007CB25 /* SupportingViews.swift */,
+				A01BCBC0259D199A00A37D1A /* MealListView.swift */,
+				0E8575A6245AFBD500C5F287 /* MealView.swift */,
+				A03098CB2467BBA20007CB25 /* RatingStars.swift */,
 				D2C66F36253A327800084A20 /* Meal.swift */,
 				0E8575A8245AFBD500C5F287 /* Assets.xcassets */,
 				0E8575AD245AFBD500C5F287 /* LaunchScreen.storyboard */,
@@ -224,9 +227,10 @@
 			files = (
 				D2C66F37253A327800084A20 /* Meal.swift in Sources */,
 				0E8575A3245AFBD500C5F287 /* AppDelegate.swift in Sources */,
-				A03098CC2467BBA20007CB25 /* SupportingViews.swift in Sources */,
+				A03098CC2467BBA20007CB25 /* RatingStars.swift in Sources */,
 				0E8575A5245AFBD500C5F287 /* SceneDelegate.swift in Sources */,
-				0E8575A7245AFBD500C5F287 /* ContentView.swift in Sources */,
+				0E8575A7245AFBD500C5F287 /* MealView.swift in Sources */,
+				A01BCBC1259D199A00A37D1A /* MealListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
+				DEVELOPMENT_TEAM = 9HEUH9ZE2Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -400,6 +405,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
+				DEVELOPMENT_TEAM = 9HEUH9ZE2Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;

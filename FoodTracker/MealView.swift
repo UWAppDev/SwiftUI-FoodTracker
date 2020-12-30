@@ -8,8 +8,8 @@
 import SwiftUI
 import Introspect
 
-struct ContentView: View {
-    @State var meal: Meal = Meal(name: "Untitled Meal", rating: 4)!
+struct MealView: View {
+    @State var meal: Meal// = Meal(name: "Untitled Meal", rating: 4)!
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
             Text("Meal Name")
@@ -29,8 +29,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct MealView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MealView()
+//    }
+//}
