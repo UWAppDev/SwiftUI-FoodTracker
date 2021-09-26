@@ -14,36 +14,30 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State var items: [Int] = []
-    @State var value = 0
+// TODO: How about an uneditable version?
+// TODO: accessibility representation
+struct StarRating: View {
+    // TODO: any validation (0...maximumValue)?
+    @Binding var value: Int
+    let maximumValue = 5
 
     var body: some View {
-        NavigationView {
-            VStack {
-                ForEach(items, id: \.self) { item in
-                    Text("\(item)")
-                }
-
-                StarRating(value: $value)
-            }
-            .navigationTitle(Text("Your Meals"))
-            .toolbar {
+        HStack {
+            ForEach(1...maximumValue, id: \.self) { index in
                 Button {
-                    // TODO: Add meal
-                    withAnimation {
-                        items.append(Int.random(in: Int.min...Int.max))
-                    }
+                    value = index
                 } label: {
-                    Label("Add meal", systemImage: "plus")
+                    Image(systemName: index <= value ? "star.fill" : "star")
                 }
             }
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct StarRating_Previews: PreviewProvider {
+    @State static var value: Int = 3
+
     static var previews: some View {
-        ContentView()
+        StarRating(value: $value)
     }
 }

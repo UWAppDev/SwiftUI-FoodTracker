@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D235695C26FC41E200284277 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235695B26FC41E200284277 /* StarRating.swift */; };
+		D235695D26FC41E200284277 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235695B26FC41E200284277 /* StarRating.swift */; };
 		F7EED30126FC2F36001EA317 /* FoodTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */; };
 		F7EED30226FC2F36001EA317 /* FoodTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */; };
 		F7EED30326FC2F36001EA317 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED2F426FC2F35001EA317 /* ContentView.swift */; };
@@ -16,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D21B587227004C0800CF778A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D21B587327004C0800CF778A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D235695B26FC41E200284277 /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
 		F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerApp.swift; sourceTree = "<group>"; };
 		F7EED2F426FC2F35001EA317 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F7EED2F526FC2F36001EA317 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -44,6 +49,8 @@
 		F7EED2ED26FC2F35001EA317 = {
 			isa = PBXGroup;
 			children = (
+				D21B587227004C0800CF778A /* README.md */,
+				D21B587327004C0800CF778A /* LICENSE */,
 				F7EED2F226FC2F35001EA317 /* Shared */,
 				F7EED2FB26FC2F36001EA317 /* Products */,
 			);
@@ -54,6 +61,7 @@
 			children = (
 				F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */,
 				F7EED2F426FC2F35001EA317 /* ContentView.swift */,
+				D235695B26FC41E200284277 /* StarRating.swift */,
 				F7EED2F526FC2F36001EA317 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -114,6 +122,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
+				ORGANIZATIONNAME = "AppDev@UW.edu";
 				TargetAttributes = {
 					F7EED2F926FC2F36001EA317 = {
 						CreatedOnToolsVersion = 13.0;
@@ -168,6 +177,7 @@
 			files = (
 				F7EED30326FC2F36001EA317 /* ContentView.swift in Sources */,
 				F7EED30126FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
+				D235695C26FC41E200284277 /* StarRating.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +187,7 @@
 			files = (
 				F7EED30426FC2F36001EA317 /* ContentView.swift in Sources */,
 				F7EED30226FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
+				D235695D26FC41E200284277 /* StarRating.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
