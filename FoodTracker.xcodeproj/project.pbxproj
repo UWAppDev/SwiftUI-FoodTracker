@@ -51,12 +51,12 @@
 			children = (
 				D21B587227004C0800CF778A /* README.md */,
 				D21B587327004C0800CF778A /* LICENSE */,
-				F7EED2F226FC2F35001EA317 /* Shared */,
+				F7EED2F226FC2F35001EA317 /* FoodTracker.swiftpm */,
 				F7EED2FB26FC2F36001EA317 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F7EED2F226FC2F35001EA317 /* Shared */ = {
+		F7EED2F226FC2F35001EA317 /* FoodTracker.swiftpm */ = {
 			isa = PBXGroup;
 			children = (
 				F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */,
@@ -64,7 +64,7 @@
 				D235695B26FC41E200284277 /* StarRating.swift */,
 				F7EED2F526FC2F36001EA317 /* Assets.xcassets */,
 			);
-			path = Shared;
+			path = FoodTracker.swiftpm;
 			sourceTree = "<group>";
 		};
 		F7EED2FB26FC2F36001EA317 /* Products */ = {
