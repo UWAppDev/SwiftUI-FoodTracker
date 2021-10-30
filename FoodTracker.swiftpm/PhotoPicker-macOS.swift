@@ -12,6 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#if os(macOS)
 import SwiftUI
 
 extension View {
@@ -71,3 +72,4 @@ struct PhotoPicker_Previews: PreviewProvider {
         }
     }
 }
+#endif

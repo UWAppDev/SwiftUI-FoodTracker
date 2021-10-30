@@ -12,6 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#if os(iOS)
 import SwiftUI
 import PhotosUI
 import UniformTypeIdentifiers
@@ -176,3 +177,4 @@ struct PhotoPicker_Previews: PreviewProvider {
         }
     }
 }
+#endif
