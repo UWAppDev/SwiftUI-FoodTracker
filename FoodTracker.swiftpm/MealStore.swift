@@ -12,73 +12,13 @@
 //
 //===----------------------------------------------------------------------===//
 
+import Combine
 import Foundation
 
-protocol CodableImage: Codable {
-    init(nativeImage: NativeImage) throws
-    var nativeImage: NativeImage { get throws }
-}
-
-struct CodableMeal<Photo: CodableImage>: Codable {
-    let name: String
-    let photo: Photo?
-    let rating: Int
-}
-
-extension CodableMeal {
-    init(meal: Meal) throws {
-        self.name = meal.name
-        if let photo = meal.photo {
-            self.photo = try Photo(nativeImage: photo)
-        } else {
-            self.photo = nil
-        }
-        self.rating = meal.rating
-    }
-    
-    var meal: Meal {
-        get throws {
-            guard let meal = Meal(name: name,
-                                  photo: try photo?.nativeImage,
-                                  rating: rating) else {
-                throw CocoaError(.coderReadCorrupt)
-            }
-            return meal
-        }
-    }
-}
-
-extension Data: CodableImage {
-    init(nativeImage: NativeImage) throws {
-        guard let data = nativeImage.data else {
-            throw EncodingError.invalidValue(nativeImage, EncodingError.Context(
-                codingPath: [],
-                debugDescription: "can't encode NativeImage as Data",
-                underlyingError: nil
-            ))
-        }
-        self = data
-    }
-    
-    var nativeImage: NativeImage {
-        get throws {
-            guard let image = NativeImage(data: self) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(
-                    codingPath: [],
-                    debugDescription: "can't decode data as NativeImage",
-                    underlyingError: nil
-                ))
-            }
-            return image
-        }
-    }
-}
-
-import Combine
-
-class MealStore: ObservableObject {
-    @Published
-    var meals: [Meal]
+// NOTE: to keep things simple, let's use ``UserDefaults``
+class MealStore/*UserDefaults*/: ObservableObject {
+    // NOTE: unfortunately, normal didSet doesn't work here
+    @Published var meals: [Meal]
     private var cancellable: AnyCancellable?
     
     static let sampleMeals = [
@@ -90,22 +30,86 @@ class MealStore: ObservableObject {
     ]
     
     init() {
-        if let storedMealsData = UserDefaults.standard.data(forKey: "meals"),
-           let storedMeals = try? PropertyListDecoder().decode([CodableMeal<Data>].self,
-                                                               from: storedMealsData),
-           let meals = try? storedMeals.map({ try $0.meal }) {
-            self.meals = meals
-        } else {
-            self.meals = Self.sampleMeals
-        }
-        cancellable = $meals.sink { newValue in
+        self.meals = Self.savedMeals ?? Self.sampleMeals
+        cancellable = $meals.sink(receiveValue: save)
+    }
+    
+    // NOTE: it's very important to have ``savedMeals`` and ``save(_:)``
+    // so later we can have different implementations (e.g. Firebase) and
+    // not need to change other parts of MealStore
+    static var savedMeals: [Meal]? {
+        if let storedMealsData = UserDefaults.standard.data(forKey: "meals") {
             do {
-                let storableMeals = try newValue.map(CodableMeal<Data>.init)
-                let data = try PropertyListEncoder().encode(storableMeals)
-                UserDefaults.standard.set(data, forKey: "meals")
+                return try PropertyListDecoder()
+                    .decode([UserDefaultsMeal].self, from: storedMealsData)
+                    .map { try $0.meal }
             } catch {
                 print(error)
+                return nil
             }
+        }
+        return nil
+    }
+    
+    func save(_ newValue: [Meal]) {
+        do {
+            let storableMeals = try newValue.map(UserDefaultsMeal.init)
+            let data = try PropertyListEncoder().encode(storableMeals)
+            UserDefaults.standard.set(data, forKey: "meals")
+        } catch {
+            print(error)
+        }
+    }
+}
+
+struct UserDefaultsMeal: Codable {
+    let name: String
+    let photoData: Data?
+    let rating: Int
+}
+
+extension UserDefaultsMeal {
+    init(meal: Meal) throws {
+        self.name = meal.name
+        if let photo = meal.photo {
+            guard let data = photo.data else {
+                // NOTE: we should probably have an error struct somewhere
+                // but I'm too lazy to write that for now
+                throw EncodingError.invalidValue(photo, EncodingError.Context(
+                    codingPath: [],
+                    debugDescription: "can't encode NativeImage as Data",
+                    underlyingError: nil
+                ))
+            }
+            self.photoData = data
+        } else {
+            self.photoData = nil
+        }
+        self.rating = meal.rating
+    }
+    
+    var meal: Meal {
+        get throws {
+            var photo: NativeImage?
+            if let data = photoData {
+                guard let image = NativeImage(data: data) else {
+                    throw DecodingError.dataCorrupted(DecodingError.Context(
+                        codingPath: [],
+                        debugDescription: "can't decode data as NativeImage",
+                        underlyingError: nil
+                    ))
+                }
+                photo = image
+            } else {
+                photo = nil
+            }
+            
+            guard let meal = Meal(name: name,
+                                  photo: photo,
+                                  rating: rating) else {
+                throw CocoaError(.coderReadCorrupt)
+            }
+            return meal
         }
     }
 }
