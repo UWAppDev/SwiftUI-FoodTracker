@@ -14,11 +14,12 @@
 
 import SwiftUI
 import PhotosUI
+import UniformTypeIdentifiers
 
 extension View {
     func photoImporter(
         isPresented: Binding<Bool>,
-        onCompletion: @escaping (Result<NativeImage, Error>) -> Void
+        onCompletion: @escaping (Result<URL, Error>) -> Void
     ) -> some View {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 1  // the default
@@ -29,9 +30,9 @@ extension View {
                 isPresented: isPresented,
                 configuration: configuration
             ) { result in
-                onCompletion(result.flatMap { images in
-                    if let image = images.first {
-                        return .success(image)
+                onCompletion(result.flatMap { urls in
+                    if let url = urls.first {
+                        return .success(url)
                     }
                     return .failure(CocoaError(.userCancelled))
                 })
@@ -42,11 +43,12 @@ extension View {
     func photoImporter(
         isPresented: Binding<Bool>,
         allowsMultipleSelection: Bool,
-        onCompletion: @escaping (Result<[NativeImage], Error>) -> Void
+        onCompletion: @escaping (Result<[URL], Error>) -> Void
     ) -> some View {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = allowsMultipleSelection ? 0 : 1
         configuration.filter = .images
+
         return self.sheet(isPresented: isPresented) {
             PhotoPicker(
                 isPresented: isPresented,
@@ -62,7 +64,7 @@ extension View {
 struct PhotoPicker: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
     let configuration: PHPickerConfiguration
-    let onCompletion: (Result<[NativeImage], Error>) -> Void
+    let onCompletion: (Result<[URL], Error>) -> Void
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
         let controller = PHPickerViewController(configuration: configuration)
@@ -90,7 +92,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
                     didFinishPicking results: [PHPickerResult]) {
             Task {
                 do {
-                    let images = try await uiImages(from: results)
+                    let images = try await imageURLs(from: results)
                     complete(with: .success(images))
                 } catch {
                     complete(with: .failure(error))
@@ -100,30 +102,29 @@ struct PhotoPicker: UIViewControllerRepresentable {
         
         // Explore structured concurrency in Swift
         // https://developer.apple.com/wwdc21/10134
-        private func uiImages(from phPickerResults: [PHPickerResult]) async throws -> [UIImage] {
-            try await withThrowingTaskGroup(of: UIImage.self) { group in
-                var images = [UIImage]()
-                images.reserveCapacity(phPickerResults.count)
+        private func imageURLs(from phPickerResults: [PHPickerResult]) async throws -> [URL] {
+            try await withThrowingTaskGroup(of: URL.self) { group in
+                var imageURLs = [URL]()
+                imageURLs.reserveCapacity(phPickerResults.count)
 
                 for result in phPickerResults {
-                    // TODO: Fails for webp, what am I missing?
-                    guard result.itemProvider.canLoadObject(ofClass: UIImage.self) else {
+                    guard result.itemProvider.hasItemConformingToTypeIdentifier(UTType.image.identifier) else {
                         throw AVError(.failedToLoadMediaData)
                     }
                     group.addTask {
-                        try await result.itemProvider.loadObjectAsync(ofClass: UIImage.self)
+                        try await result.itemProvider.loadItem(forTypeIdentifier: UTType.image.identifier) as! URL
                     }
                 }
                 
                 // Obtain results from the child tasks, sequentially.
-                for try await image in group {
-                    images.append(image)
+                for try await imageURL in group {
+                    imageURLs.append(imageURL)
                 }
-                return images
+                return imageURLs
             }
         }
         
-        private func complete(with result: Result<[NativeImage], Error>) {
+        private func complete(with result: Result<[URL], Error>) {
             coordinated.isPresented = false
             coordinated.onCompletion(result)
         }
@@ -150,7 +151,7 @@ struct PhotoPicker_Previews: PreviewProvider {
     @State
     static var showImagePicker: Bool = false
     @State
-    static var image: Image = Image(systemName: "photo")
+    static var image: AsyncImage = AsyncImage(url: nil)
     
     static var previews: some View {
         VStack {
@@ -166,11 +167,11 @@ struct PhotoPicker_Previews: PreviewProvider {
         }
         .photoImporter(isPresented: $showImagePicker) { result in
             switch result {
-            case .success(let nativeImage):
-                image = Image(nativeImage: nativeImage)
+            case .success(let url):
+                image = AsyncImage(url: url)
             case .failure(let error):
                 print(error)
-                image = Image(systemName: "x.circle")
+                image = AsyncImage(url: nil)
             }
         }
     }

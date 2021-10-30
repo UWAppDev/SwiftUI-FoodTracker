@@ -17,40 +17,22 @@ import SwiftUI
 extension View {
     func photoImporter(
         isPresented: Binding<Bool>,
-        onCompletion: @escaping (Result<NativeImage, Error>) -> Void
+        onCompletion: @escaping (Result<URL, Error>) -> Void
     ) -> some View {
         self.fileImporter(isPresented: isPresented,
-                          allowedContentTypes: [.image]) { result in
-            onCompletion(result.flatMap { url in
-                Result<NSImage, Error> {
-                    if let image = NSImage(contentsOf: url) {
-                        return image
-                    }
-                    throw URLError(.cannotOpenFile)
-                }
-            })
-        }
+                          allowedContentTypes: [.image],
+                          onCompletion: onCompletion)
     }
     
     func photoImporter(
         isPresented: Binding<Bool>,
         allowsMultipleSelection: Bool,
-        onCompletion: @escaping (Result<[NativeImage], Error>) -> Void
+        onCompletion: @escaping (Result<[URL], Error>) -> Void
     ) -> some View {
         self.fileImporter(isPresented: isPresented,
                           allowedContentTypes: [.image],
-                          allowsMultipleSelection: allowsMultipleSelection) { result in
-            onCompletion(result.flatMap { urls in
-                Result<[NSImage], Error> {
-                    try urls.map { url in
-                        if let image = NSImage(contentsOf: url) {
-                            return image
-                        }
-                        throw URLError(.cannotOpenFile)
-                    }
-                }
-            })
-        }
+                          allowsMultipleSelection: allowsMultipleSelection,
+                          onCompletion: onCompletion)
     }
 }
 
@@ -58,7 +40,7 @@ struct PhotoPicker_Previews: PreviewProvider {
     @State
     static var showImagePicker: Bool = false
     @State
-    static var image: Image = Image(systemName: "photo")
+    static var image: AsyncImage = AsyncImage(url: nil)
 
     static var previews: some View {
         HStack {
@@ -80,11 +62,11 @@ struct PhotoPicker_Previews: PreviewProvider {
         }
         .photoImporter(isPresented: $showImagePicker) { result in
             switch result {
-            case .success(let nativeImage):
-                image = Image(nativeImage: nativeImage)
+            case .success(let url):
+                image = AsyncImage(url: url)
             case .failure(let error):
                 print(error)
-                image = Image(systemName: "x.circle")
+                image = AsyncImage(url: nil)
             }
         }
     }
