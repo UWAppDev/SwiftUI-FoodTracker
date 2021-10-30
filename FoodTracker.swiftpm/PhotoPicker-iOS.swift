@@ -132,22 +132,6 @@ struct PhotoPicker: UIViewControllerRepresentable {
     }
 }
 
-extension NSItemProvider {
-    // Meet async/await in Swift
-    // https://developer.apple.com/wwdc21/10132/
-    func loadObjectAsync<T: NSItemProviderReading>(ofClass aClass: T.Type) async throws -> T {
-        return try await withCheckedThrowingContinuation { continuation in
-            loadObject(ofClass: aClass) { reading, error in
-                if let reading = reading as? T {
-                    continuation.resume(returning: reading)
-                } else {
-                    continuation.resume(throwing: error!)
-                }
-            }
-        }
-    }
-}
-
 struct PhotoPicker_Previews: PreviewProvider {
     @State
     static var showImagePicker: Bool = false
