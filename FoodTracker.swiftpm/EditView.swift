@@ -15,32 +15,39 @@
 import SwiftUI
 
 struct EditView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var presentationMode
     
     @Binding var meal: Meal
     @State var mealTitle: String = ""
     @State var photo: NativeImage? = nil
     @State var rating: Int = 0
     
+    var newMeal: Meal? {
+        Meal(name: mealTitle, photo: photo, rating: rating)
+    }
+    
     var body: some View {
-        VStack {
-            TextField("Meal Name", text: $mealTitle)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            if let photo = meal.photo {
-                Image(nativeImage: photo)
-                    // NOTE: check the preview before adding these as fixes
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding()
-            } else {
-                Image(systemName: "cup.and.saucer")
-                    // NOTE: new SwiftUI feature for SFSymbol
-                    .symbolVariant(.fill)
-                    .imageScale(.large)
+        ScrollView {
+            VStack(spacing: 16) {
+                TextField("Meal Name", text: $mealTitle)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                // TODO: accept new images
+                if let photo = meal.photo {
+                    Image(nativeImage: photo)
+                        // NOTE: check the preview before adding these as fixes
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                } else {
+                    Image(systemName: "cup.and.saucer")
+                        // NOTE: new SwiftUI feature for SFSymbol
+                        .symbolVariant(.fill)
+                        .imageScale(.large)
+                }
+
+                StarRating(title: Text("rating"), value: $rating)
             }
-            StarRatingDisplay(title: Text("rating"), value: rating)
-            Spacer()
+            .padding()
         }
         .navigationTitle(mealTitle.isEmpty ? meal.name : mealTitle)
         .toolbar {
@@ -48,10 +55,11 @@ struct EditView: View {
                 meal.name = mealTitle
                 meal.photo = photo
                 meal.rating = rating
-                self.presentationMode.wrappedValue.dismiss()
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Save")
             }
+            .disabled(newMeal == nil)
         }
         .onAppear {
             mealTitle = meal.name

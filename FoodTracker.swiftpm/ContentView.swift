@@ -73,6 +73,8 @@ struct MealDisplay: View {
                 Spacer()
                 Text(meal.name)
                     .font(.title2)
+                    // make sure it takes max width possible
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 StarRatingDisplay(title: Text("rating"), value: meal.rating)
                 Spacer()
