@@ -53,7 +53,11 @@ struct EditView: View {
         .toolbar {
             Button {
                 meal = newMeal!
+                #if os(iOS)
+                // this is already handled on macOS.
+                // calling dismiss will actually close the app :(
                 dismiss()
+                #endif
             } label: {
                 Text("Save")
             }

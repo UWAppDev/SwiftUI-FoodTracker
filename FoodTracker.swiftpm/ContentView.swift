@@ -24,7 +24,7 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach($mealStore.meals) { $meal in
-                    if query.isEmpty || meal.name.lowercased().contains(query.lowercased()) {
+                    if query.isEmpty || meal.name.localizedCaseInsensitiveContains(query) {
                         NavigationLink(destination: EditView(meal: $meal)) {
                             // NOTE: command+click on HStack, then extract
                             MealDisplay(meal: meal)

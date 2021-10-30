@@ -63,6 +63,7 @@ class MealStore/*UserDefaults*/: ObservableObject {
 }
 
 struct UserDefaultsMeal: Codable {
+    let id: UUID
     let name: String
     let photoData: Data?
     let rating: Int
@@ -70,6 +71,7 @@ struct UserDefaultsMeal: Codable {
 
 extension UserDefaultsMeal {
     init(meal: Meal) throws {
+        self.id = meal.id
         self.name = meal.name
         if let photo = meal.photo {
             guard let data = photo.data else {
@@ -104,7 +106,8 @@ extension UserDefaultsMeal {
                 photo = nil
             }
             
-            guard let meal = Meal(name: name,
+            guard let meal = Meal(id: id,
+                                  name: name,
                                   photo: photo,
                                   rating: rating) else {
                 throw CocoaError(.coderReadCorrupt)

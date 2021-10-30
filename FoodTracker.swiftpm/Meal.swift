@@ -15,16 +15,17 @@
 import Foundation
 
 // NOTE: follow the original doc for how to implement this file step by step.
-struct Meal: Equatable {
+struct Meal: Equatable, Identifiable {
     // MARK: Properties
     #warning("TODO: TRY CONVERT TO LET CONSTANTS")
+    let id: UUID
     var name: String
     var photo: NativeImage?
     var rating: Int
     
     // MARK: Initialization
     // NOTE: the `?` is added when compiler prompted to do so
-    init?(name: String, photo: NativeImage?, rating: Int) {
+    init?(id: UUID = UUID(), name: String, photo: NativeImage?, rating: Int) {
         // The name must not be empty
         guard !name.isEmpty else {
             return nil
@@ -36,15 +37,9 @@ struct Meal: Equatable {
         }
 
         // Initialize stored properties.
+        self.id = id
         self.name = name
         self.photo = photo
         self.rating = rating
-    }
-}
-
-extension Meal: Identifiable {
-    var id: String {
-        // hopefully we don't have two meals with the same name
-        return name
     }
 }
