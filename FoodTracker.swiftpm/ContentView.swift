@@ -17,17 +17,17 @@ import SwiftUI
 struct ContentView: View {
     @State var items: [Int] = []
     @State var value = 0
-
+    
     var body: some View {
         NavigationView {
             VStack {
                 ForEach(items, id: \.self) { item in
                     Text("\(item)")
                 }
-
-                StarRating(title: "interactive stars", value: $value)
+                
+                StarRating(title: Text("interactive stars"), value: $value)
                     .accentColor(.yellow)
-                StarRatingDisplay(title: "static stars", value: 5)
+                StarRatingDisplay(title: Text("static stars"), value: 5)
                     .accentColor(.red)
             }
             .navigationTitle(Text("Your Meals"))

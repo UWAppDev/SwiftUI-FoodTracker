@@ -17,10 +17,10 @@ import SwiftUI
 // NOTE: we should teach this static version first because
 // it doesn't have a lot of the SwiftUI @State/@Binding things
 struct StarRatingDisplay: View {
-    let title: LocalizedStringKey
+    let title: Text
     let value: Int
     let maximumValue = 5
-
+    
     var body: some View {
         HStack {
             ForEach(0..<maximumValue) { index in
@@ -30,17 +30,25 @@ struct StarRatingDisplay: View {
                     .foregroundColor(.accentColor)
             }
         }
+        // NOTE: though accessibility is very important
+        // we should make it a separate lecture where
+        // - we show students how to identify some problems
+        // - demonstrate how to solve a few
+        // - let students discover other problems with the app and fix
+        // - compare their solution with ours, and
+        //    - their solution might be better!
+        .accessibilityElement(children: .ignore)
         .accessibilityLabel(title)
         .accessibilityValue("\(value) stars our of \(maximumValue) stars")
     }
 }
 
 struct StarRating: View {
-    let title: LocalizedStringKey
+    let title: Text
     @Binding var value: Int
     // NOTE: here, we show students the concept of static
     static let maximumValue = 5
-
+    
     var body: some View {
         HStack {
             // Note: using id: \.self is a common practice that we should show
@@ -60,21 +68,33 @@ struct StarRating: View {
             }
         }
         .accessibilityRepresentation {
-            Stepper(title, value: $value, in: 0...Self.maximumValue)
+            Slider(
+                // NOTE: Slider only takes decimals, so we
+                // convert Binding<Int> to Binding<Double>
+                value: Binding {
+                    /* return */ Double(value)
+                } set: { newValue in
+                    value = Int(newValue)
+                },
+                in: 0...Double(Self.maximumValue),
+                step: 1
+            )
+            .accessibilityLabel(title)
+            .accessibilityValue("\(value) stars our of \(Self.maximumValue) stars")
         }
     }
 }
 
 struct StarRating_Previews: PreviewProvider {
     @State static var value: Int = 3
-
+    
     static var previews: some View {
-        StarRating(title: "star rating", value: $value)
+        StarRating(title: Text("star rating"), value: $value)
         
         ForEach(0...StarRating.maximumValue, id: \.self) { i in
             VStack {
                 Text("\(i) stars")
-                StarRatingDisplay(title: "star rating", value: i)
+                StarRatingDisplay(title: Text("star rating"), value: i)
             }
         }
     }
