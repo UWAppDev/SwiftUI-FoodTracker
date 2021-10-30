@@ -27,6 +27,7 @@ struct StarRatingDisplay: View {
                 // NOTE: unfortunately, we have to teach ternary operator
                 // otherwise SwiftUI does funky things when animating
                 Image(systemName: index < value ? "star.fill" : "star")
+                    .imageScale(.large)
                     .foregroundColor(.accentColor)
             }
         }
@@ -57,6 +58,7 @@ struct StarRating: View {
                     value = index
                 } label: {
                     Image(systemName: index <= value ? "star.fill" : "star")
+                        .imageScale(.large)
                         // we need the following for macOS
                         .foregroundColor(.accentColor)
                 }
