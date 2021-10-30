@@ -20,9 +20,14 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(meals) { meal in
+                ForEach($meals) { $meal in
                     // NOTE: command+click on HStack, then extract
-                    MealDisplay(meal: meal)
+                    NavigationLink(destination: EditView(meal: $meal)) {
+                        MealDisplay(meal: meal)
+                    }
+                }
+                .onDelete { offsets in
+                    meals.remove(atOffsets: offsets)
                 }
             }
             .navigationTitle(Text("Your Meals"))
