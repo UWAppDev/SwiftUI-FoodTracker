@@ -15,7 +15,7 @@
 import SwiftUI
 
 struct EditView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @Binding var meal: Meal
     @State var mealTitle: String = ""
@@ -52,10 +52,8 @@ struct EditView: View {
         .navigationTitle(mealTitle.isEmpty ? meal.name : mealTitle)
         .toolbar {
             Button {
-                meal.name = mealTitle
-                meal.photo = photo
-                meal.rating = rating
-                presentationMode.wrappedValue.dismiss()
+                meal = newMeal!
+                dismiss()
             } label: {
                 Text("Save")
             }

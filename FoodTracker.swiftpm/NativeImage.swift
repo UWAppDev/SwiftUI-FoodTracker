@@ -20,18 +20,34 @@ import SwiftUI
 
 #if canImport(UIKit)
 import UIKit
+
 typealias NativeImage = UIImage
+
 extension Image {
     init(nativeImage: NativeImage) {
         self.init(uiImage: nativeImage)
     }
 }
+
+extension NativeImage {
+    var data: Data? {
+        pngData()
+    }
+}
 #else
 import AppKit
+
 typealias NativeImage = NSImage
+
 extension Image {
     init(nativeImage: NativeImage) {
         self.init(nsImage: nativeImage)
+    }
+}
+
+extension NSImage {
+    var data: Data? {
+        tiffRepresentation
     }
 }
 #endif

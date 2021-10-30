@@ -19,6 +19,8 @@
 		D29F5EAC272D3367001F94D0 /* NativeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F5EAA272D3367001F94D0 /* NativeImage.swift */; };
 		D29F5EAE272D429F001F94D0 /* PhotoPicker-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F5EAD272D429F001F94D0 /* PhotoPicker-iOS.swift */; };
 		D29F5EB1272D4659001F94D0 /* PhotoPicker-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F5EB0272D4659001F94D0 /* PhotoPicker-macOS.swift */; };
+		D2F86DF7272DD82000533647 /* MealStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F86DF6272DD82000533647 /* MealStore.swift */; };
+		D2F86DF8272DD82000533647 /* MealStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F86DF6272DD82000533647 /* MealStore.swift */; };
 		F7EED30126FC2F36001EA317 /* FoodTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */; };
 		F7EED30226FC2F36001EA317 /* FoodTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */; };
 		F7EED30326FC2F36001EA317 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED2F426FC2F35001EA317 /* ContentView.swift */; };
@@ -56,6 +58,7 @@
 		D29F5EAA272D3367001F94D0 /* NativeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeImage.swift; sourceTree = "<group>"; };
 		D29F5EAD272D429F001F94D0 /* PhotoPicker-iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPicker-iOS.swift"; sourceTree = "<group>"; };
 		D29F5EB0272D4659001F94D0 /* PhotoPicker-macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPicker-macOS.swift"; sourceTree = "<group>"; };
+		D2F86DF6272DD82000533647 /* MealStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealStore.swift; sourceTree = "<group>"; };
 		F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerApp.swift; sourceTree = "<group>"; };
 		F7EED2F426FC2F35001EA317 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F7EED2F526FC2F36001EA317 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 				A060B524272D39AD00EABD0A /* EditView.swift */,
 				D235695B26FC41E200284277 /* StarRating.swift */,
 				D29F5E8C272D26BD001F94D0 /* Meal.swift */,
+				D2F86DF6272DD82000533647 /* MealStore.swift */,
 				F7EED2F526FC2F36001EA317 /* Assets.xcassets */,
 				D29F5EAA272D3367001F94D0 /* NativeImage.swift */,
 				D29F5EAD272D429F001F94D0 /* PhotoPicker-iOS.swift */,
@@ -321,6 +325,7 @@
 				F7EED30326FC2F36001EA317 /* ContentView.swift in Sources */,
 				A060B525272D39AD00EABD0A /* EditView.swift in Sources */,
 				F7EED30126FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
+				D2F86DF7272DD82000533647 /* MealStore.swift in Sources */,
 				D29F5EAB272D3367001F94D0 /* NativeImage.swift in Sources */,
 				D235695C26FC41E200284277 /* StarRating.swift in Sources */,
 			);
@@ -335,6 +340,7 @@
 				F7EED30426FC2F36001EA317 /* ContentView.swift in Sources */,
 				A060B526272D39AD00EABD0A /* EditView.swift in Sources */,
 				F7EED30226FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
+				D2F86DF8272DD82000533647 /* MealStore.swift in Sources */,
 				D29F5EAC272D3367001F94D0 /* NativeImage.swift in Sources */,
 				D235695D26FC41E200284277 /* StarRating.swift in Sources */,
 			);

@@ -15,19 +15,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var meals: [Meal] = ContentView_Previews.meals
+    // NOTE: we start with a simple state, and gradually change more advanced
+    // @State var meals: [Meal] = ContentView_Previews.meals
+    @ObservedObject var mealStore: MealStore = MealStore()
     
     var body: some View {
         NavigationView {
             List {
-                ForEach($meals) { $meal in
+                ForEach($mealStore.meals) { $meal in
                     // NOTE: command+click on HStack, then extract
                     NavigationLink(destination: EditView(meal: $meal)) {
                         MealDisplay(meal: meal)
                     }
                 }
                 .onDelete { offsets in
-                    meals.remove(atOffsets: offsets)
+                    mealStore.meals.remove(atOffsets: offsets)
                 }
             }
             .navigationTitle(Text("Your Meals"))
@@ -35,7 +37,7 @@ struct ContentView: View {
                 Button {
                     // TODO: Add meal
                     withAnimation {
-                        meals.append(Meal(name: "yes", photo: nil, rating: 1)!)
+                        mealStore.meals.append(Meal(name: "yes", photo: nil, rating: 1)!)
                     }
                 } label: {
                     Label("Add meal", systemImage: "plus")
@@ -86,18 +88,12 @@ struct MealDisplay: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static let meals = [
-        Meal(name: "Caprese Salad", photo: #imageLiteral(resourceName: "meal1"), rating: 4)!,
-        Meal(name: "Chicken and Potatoes", photo: #imageLiteral(resourceName: "meal2"), rating: 5)!,
-        Meal(name: "Pasta with Meatballs But Long Name Is Very Long", photo: #imageLiteral(resourceName: "meal3"), rating: 3)!,
-        Meal(name: "No Image And Very Long Name", photo: nil, rating: 1)!,
-        Meal(name: "A", photo: nil, rating: 1)!,
-    ]
+    // static let meals = MealStore.sampleMeals
     
     static var previews: some View {
-        ContentView(meals: meals)
+        ContentView()
         
-        ContentView(meals: meals)
+        ContentView()
             .environment(\.colorScheme, .dark)
         
         ContentView()
