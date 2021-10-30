@@ -18,14 +18,17 @@ struct ContentView: View {
     // NOTE: we start with a simple state, and gradually change more advanced
     // @State var meals: [Meal] = ContentView_Previews.meals
     @ObservedObject var mealStore: MealStore = MealStore()
+    @State var query: String = ""
     
     var body: some View {
         NavigationView {
             List {
                 ForEach($mealStore.meals) { $meal in
-                    // NOTE: command+click on HStack, then extract
-                    NavigationLink(destination: EditView(meal: $meal)) {
-                        MealDisplay(meal: meal)
+                    if query.isEmpty || meal.name.lowercased().contains(query.lowercased()) {
+                        NavigationLink(destination: EditView(meal: $meal)) {
+                            // NOTE: command+click on HStack, then extract
+                            MealDisplay(meal: meal)
+                        }
                     }
                 }
                 .onDelete { offsets in
@@ -33,6 +36,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle(Text("Your Meals"))
+            .searchable(text: $query)
             .toolbar {
                 Button {
                     // TODO: Add meal
@@ -43,6 +47,8 @@ struct ContentView: View {
                     Label("Add meal", systemImage: "plus")
                 }
             }
+            
+            Text("Select a meal to view details")
         }
     }
 }
@@ -75,6 +81,7 @@ struct MealDisplay: View {
                 Spacer()
                 Text(meal.name)
                     .font(.title2)
+                    .lineLimit(2)
                     // make sure it takes max width possible
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()

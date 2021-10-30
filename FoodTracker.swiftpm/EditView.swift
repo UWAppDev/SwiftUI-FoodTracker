@@ -57,7 +57,7 @@ struct EditView: View {
             } label: {
                 Text("Save")
             }
-            .disabled(newMeal == nil)
+            .disabled(newMeal == nil || newMeal == meal)
         }
         .onAppear {
             mealTitle = meal.name

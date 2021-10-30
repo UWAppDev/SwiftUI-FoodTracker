@@ -15,7 +15,7 @@
 import Foundation
 
 // NOTE: follow the original doc for how to implement this file step by step.
-struct Meal {
+struct Meal: Equatable {
     // MARK: Properties
     #warning("TODO: TRY CONVERT TO LET CONSTANTS")
     var name: String
