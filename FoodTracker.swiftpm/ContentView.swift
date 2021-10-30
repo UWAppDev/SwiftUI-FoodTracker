@@ -25,7 +25,10 @@ struct ContentView: View {
                     Text("\(item)")
                 }
 
-                StarRating(value: $value)
+                StarRating(title: "interactive stars", value: $value)
+                    .accentColor(.yellow)
+                StarRatingDisplay(title: "static stars", value: 5)
+                    .accentColor(.red)
             }
             .navigationTitle(Text("Your Meals"))
             .toolbar {
