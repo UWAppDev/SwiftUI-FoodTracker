@@ -15,27 +15,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var items: [Int] = []
-    @State var value = 0
+    @State var meals: [Meal] = ContentView_Previews.meals
     
     var body: some View {
         NavigationView {
-            VStack {
-                ForEach(items, id: \.self) { item in
-                    Text("\(item)")
+            List {
+                ForEach(meals) { meal in
+                    // NOTE: command+click on HStack, then extract
+                    MealDisplay(meal: meal)
                 }
-                
-                StarRating(title: Text("interactive stars"), value: $value)
-                    .accentColor(.yellow)
-                StarRatingDisplay(title: Text("static stars"), value: 5)
-                    .accentColor(.red)
             }
             .navigationTitle(Text("Your Meals"))
             .toolbar {
                 Button {
                     // TODO: Add meal
                     withAnimation {
-                        items.append(Int.random(in: Int.min...Int.max))
+                        meals.append(Meal(name: "yes", photo: nil, rating: 1)!)
                     }
                 } label: {
                     Label("Add meal", systemImage: "plus")
@@ -45,8 +40,59 @@ struct ContentView: View {
     }
 }
 
+// NOTE: extracted
+struct MealDisplay: View {
+    let meal: Meal
+
+    var body: some View {
+        HStack(spacing: 16) {
+            // NOTE: Group is added so we can apply `.frame` on either Image
+            // and so that they can be consistent in layout
+            Group {
+                if let photo = meal.photo {
+                    Image(nativeImage: photo)
+                        // NOTE: check the preview before adding these as fixes
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fill)
+                } else {
+                    Image(systemName: "cup.and.saucer")
+                        // NOTE: new SwiftUI feature for SFSymbol
+                        .symbolVariant(.fill)
+                        .imageScale(.large)
+                }
+            }
+            .frame(width: 80, height: 80)
+
+            
+            VStack(alignment: .leading) {
+                Spacer()
+                Text(meal.name)
+                    .font(.title2)
+                Spacer()
+                StarRatingDisplay(title: Text("rating"), value: meal.rating)
+                Spacer()
+            }
+        }
+        .padding(.vertical, 8)
+        .accessibilityElement(children: .combine)
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
+    static let meals = [
+        Meal(name: "Caprese Salad", photo: #imageLiteral(resourceName: "meal1"), rating: 4)!,
+        Meal(name: "Chicken and Potatoes", photo: #imageLiteral(resourceName: "meal2"), rating: 5)!,
+        Meal(name: "Pasta with Meatballs But Long Name Is Very Long", photo: #imageLiteral(resourceName: "meal3"), rating: 3)!,
+        Meal(name: "No Image And Very Long Name", photo: nil, rating: 1)!,
+        Meal(name: "A", photo: nil, rating: 1)!,
+    ]
+    
     static var previews: some View {
+        ContentView(meals: meals)
+        
+        ContentView(meals: meals)
+            .environment(\.colorScheme, .dark)
+        
         ContentView()
     }
 }
