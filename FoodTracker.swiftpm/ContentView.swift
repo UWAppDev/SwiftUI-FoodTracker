@@ -66,7 +66,7 @@ struct MealDisplay: View {
                     Image(nativeImage: photo)
                         // NOTE: check the preview before adding these as fixes
                         .resizable()
-                        .aspectRatio(1, contentMode: .fill)
+                        .scaledToFill()
                 } else {
                     Image(systemName: "cup.and.saucer")
                         // NOTE: new SwiftUI feature for SFSymbol
@@ -75,7 +75,7 @@ struct MealDisplay: View {
                 }
             }
             .frame(width: 80, height: 80)
-
+            .clipped()
             
             VStack(alignment: .leading) {
                 Spacer()
