@@ -140,7 +140,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
                         throw AVError(.failedToLoadMediaData)
                     }
                     group.addTask {
-                        try await result.itemProvider.loadItem(forTypeIdentifier: UTType.image.identifier) as! URL
+                        try await result.itemProvider.imageFileURL
                     }
                 }
                 
@@ -159,6 +159,24 @@ struct PhotoPicker: UIViewControllerRepresentable {
         private func complete(with result: Result<[URL], Error>) {
             dismiss()
             coordinated.onCompletion(result)
+        }
+    }
+}
+
+extension NSItemProvider {
+    // Meet async/await in Swift
+    // https://developer.apple.com/wwdc21/10132/
+    var imageFileURL: URL {
+        get async throws {
+            try await withCheckedThrowingContinuation { continuation in
+                // https://developer.apple.com/forums/thread/652496
+                loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
+                    if let error = error {
+                        continuation.resume(throwing: error)
+                    }
+                    continuation.resume(returning: url!)
+                }
+            }
         }
     }
 }
