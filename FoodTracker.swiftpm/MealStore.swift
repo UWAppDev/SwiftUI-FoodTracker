@@ -15,7 +15,7 @@
 import Combine
 import Foundation
 
-class MealStore/*FileSystem*/: ObservableObject {
+class /*FileSystem*/MealStore: ObservableObject {
     // NOTE: unfortunately, normal didSet doesn't work here
     @Published var meals: [Meal]
     private var cancellable: AnyCancellable?
