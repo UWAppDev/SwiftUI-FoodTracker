@@ -40,7 +40,7 @@ struct StarRatingDisplay: View {
         //    - their solution might be better!
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(title)
-        .accessibilityValue("\(value) stars our of \(maximumValue) stars")
+        .accessibilityValue("\(value) stars out of \(maximumValue) stars")
     }
 }
 
@@ -82,7 +82,7 @@ struct StarRating: View {
                 step: 1
             )
             .accessibilityLabel(title)
-            .accessibilityValue("\(value) stars our of \(Self.maximumValue) stars")
+            .accessibilityValue("\(value) stars out of \(Self.maximumValue) stars")
         }
     }
 }

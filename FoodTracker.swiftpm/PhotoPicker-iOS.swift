@@ -37,17 +37,9 @@ extension View {
         isPresented: Binding<Bool>,
         onCompletion: @escaping (Result<URL, Error>) -> Void
     ) -> some View {
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1  // the default
-        configuration.filter = .images
-        
-        return self.sheet(isPresented: isPresented) {
-            PhotoPicker(
-                isPresented: isPresented,
-                configuration: configuration
-            ) { result in
-                onCompletion(result.map { $0.first! })
-            }
+        self.photoImporter(isPresented: isPresented,
+                           allowsMultipleSelection: false) { result in
+            onCompletion(result.map { $0.first! })
         }
     }
     
@@ -175,7 +167,7 @@ struct PhotoPicker_Previews: PreviewProvider {
     @State
     static var showImagePicker: Bool = false
     @State
-    static var image: AsyncImage = AsyncImage(url: nil)
+    static var url: URL? = nil
     
     static var previews: some View {
         VStack {
@@ -185,17 +177,15 @@ struct PhotoPicker_Previews: PreviewProvider {
                 Text("Select Image")
             }
             
-            if let image = image {
-                image
-            }
+            AsyncImage(url: url)
         }
         .photoImporter(isPresented: $showImagePicker) { result in
             switch result {
             case .success(let url):
-                image = AsyncImage(url: url)
+                self.url = url
             case .failure(let error):
                 print(error)
-                image = AsyncImage(url: nil)
+                url = nil
             }
         }
     }
