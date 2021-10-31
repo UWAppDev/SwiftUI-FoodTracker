@@ -15,10 +15,11 @@
 import SwiftUI
 
 @main
-struct FoodTrackerApp: App {
+struct FoodTrackerApp: App {    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(MealStore())
         }
     }
 }

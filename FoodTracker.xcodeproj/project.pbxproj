@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A060B525272D39AD00EABD0A /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060B524272D39AD00EABD0A /* EditView.swift */; };
 		A060B526272D39AD00EABD0A /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060B524272D39AD00EABD0A /* EditView.swift */; };
+		A0D10E39272F2951005FA0D6 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D10E38272F2951005FA0D6 /* ImageView.swift */; };
+		A0D10E3A272F2956005FA0D6 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D10E38272F2951005FA0D6 /* ImageView.swift */; };
 		D235695C26FC41E200284277 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235695B26FC41E200284277 /* StarRating.swift */; };
 		D235695D26FC41E200284277 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235695B26FC41E200284277 /* StarRating.swift */; };
 		D29F5E8D272D26BD001F94D0 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F5E8C272D26BD001F94D0 /* Meal.swift */; };
@@ -48,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		A060B524272D39AD00EABD0A /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		A0D10E38272F2951005FA0D6 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		D21B587227004C0800CF778A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D21B587327004C0800CF778A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D235695B26FC41E200284277 /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 			children = (
 				F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */,
 				F7EED2F426FC2F35001EA317 /* ContentView.swift */,
+				A0D10E38272F2951005FA0D6 /* ImageView.swift */,
 				A060B524272D39AD00EABD0A /* EditView.swift */,
 				D235695B26FC41E200284277 /* StarRating.swift */,
 				D29F5E8C272D26BD001F94D0 /* Meal.swift */,
@@ -326,6 +330,7 @@
 				A060B525272D39AD00EABD0A /* EditView.swift in Sources */,
 				F7EED30126FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
 				D2F86DF7272DD82000533647 /* MealStore.swift in Sources */,
+				A0D10E3A272F2956005FA0D6 /* ImageView.swift in Sources */,
 				D29F5EAB272D3367001F94D0 /* NativeImage.swift in Sources */,
 				D235695C26FC41E200284277 /* StarRating.swift in Sources */,
 			);
@@ -341,6 +346,7 @@
 				A060B526272D39AD00EABD0A /* EditView.swift in Sources */,
 				F7EED30226FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
 				D2F86DF8272DD82000533647 /* MealStore.swift in Sources */,
+				A0D10E39272F2951005FA0D6 /* ImageView.swift in Sources */,
 				D29F5EAC272D3367001F94D0 /* NativeImage.swift in Sources */,
 				D235695D26FC41E200284277 /* StarRating.swift in Sources */,
 			);

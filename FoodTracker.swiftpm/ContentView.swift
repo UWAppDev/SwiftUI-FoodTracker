@@ -17,7 +17,9 @@ import SwiftUI
 struct ContentView: View {
     // NOTE: we start with a simple state, and gradually change more advanced
     // @State var meals: [Meal] = ContentView_Previews.meals
-    @ObservedObject var mealStore: MealStore = MealStore()
+    // @ObservedObject var mealStore: MealStore = MealStore()
+    @EnvironmentObject var mealStore: MealStore
+    @State var showingNewMealModal: Bool = false
     @State var query: String = ""
     
     var body: some View {
@@ -39,15 +41,16 @@ struct ContentView: View {
             .searchable(text: $query)
             .toolbar {
                 Button {
-                    // TODO: Add meal
-                    withAnimation {
-                        mealStore.meals.append(Meal(name: "yes", photo: nil, rating: 1)!)
-                    }
+                    showingNewMealModal = true
                 } label: {
                     Label("Add meal", systemImage: "plus")
                 }
+                .sheet(isPresented: $showingNewMealModal) {
+                    NavigationView {
+                        NewMealModalView()
+                    }
+                }
             }
-            
             Text("Select a meal to view details")
         }
     }
@@ -91,6 +94,61 @@ struct MealDisplay: View {
         }
         .padding(.vertical, 8)
         .accessibilityElement(children: .combine)
+    }
+}
+
+struct NewMealModalView: View {
+    @EnvironmentObject var mealStore: MealStore
+    @Environment(\.dismiss) var dismiss
+    
+    @State var mealTitle: String = ""
+    @State var photo: NativeImage? = nil
+    @State var rating: Int = 0
+    @State var showPhotoPicker: Bool = false
+    
+    var newMeal: Meal? {
+        Meal(id: UUID(), name: mealTitle, photo: photo, rating: rating)
+    }
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            TextField("Meal Name", text: $mealTitle)
+                .textFieldStyle(.roundedBorder)
+            
+            StarRating(title: Text("rating"), value: $rating)
+            
+            ImageView(photo: $photo, showPhotoPicker: $showPhotoPicker)
+        }
+        .padding()
+        .navigationTitle(mealTitle.isEmpty ? "New Meal" : mealTitle)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button {
+                    //showingNewMealModal = false
+                    #if os(iOS)
+                        // this is already handled on macOS.
+                        // calling dismiss will actually close the app :(
+                        dismiss()
+                    #endif
+                } label: {
+                    Text("Cancel")
+                        .foregroundColor(.red)
+                }
+            }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    #if os(iOS)
+                        // this is already handled on macOS.
+                        // calling dismiss will actually close the app :(
+                        dismiss()
+                    #endif
+                    mealStore.meals.append(newMeal!)
+                } label: {
+                    Text("Save")
+                }
+                .disabled(mealTitle.isEmpty)
+            }
+        }
     }
 }
 
