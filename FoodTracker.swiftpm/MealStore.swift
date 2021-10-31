@@ -15,8 +15,7 @@
 import Combine
 import Foundation
 
-// NOTE: to keep things simple, let's use ``UserDefaults``
-class MealStore/*UserDefaults*/: ObservableObject {
+class MealStore/*FileSystem*/: ObservableObject {
     // NOTE: unfortunately, normal didSet doesn't work here
     @Published var meals: [Meal]
     private var cancellable: AnyCancellable?
@@ -34,30 +33,36 @@ class MealStore/*UserDefaults*/: ObservableObject {
         cancellable = $meals.sink(receiveValue: save)
     }
     
+    // NOTE: Apple isn't happy with us putting that many bytes in UserDefaults
+    static let archiveURL = FileManager.default
+        .urls(for: .documentDirectory, in: .userDomainMask)
+        .first!
+        .appendingPathComponent("meals.json")
+    
     // NOTE: it's very important to have ``savedMeals`` and ``save(_:)``
     // so later we can have different implementations (e.g. Firebase) and
     // not need to change other parts of MealStore
     static var savedMeals: [Meal]? {
-        if let storedMealsData = UserDefaults.standard.data(forKey: "meals") {
-            do {
-                return try PropertyListDecoder()
-                    .decode([UserDefaultsMeal].self, from: storedMealsData)
-                    .map { try $0.meal }
-            } catch {
-                print(error)
-                return nil
-            }
+        do {
+            let storedMealsData = try Data(contentsOf: archiveURL)
+            return try JSONDecoder()
+                .decode([UserDefaultsMeal].self, from: storedMealsData)
+                .map { try $0.meal }
+        } catch {
+            print(error)
+            return nil
         }
-        return nil
     }
     
     func save(_ newValue: [Meal]) {
-        do {
-            let storableMeals = try newValue.map(UserDefaultsMeal.init)
-            let data = try PropertyListEncoder().encode(storableMeals)
-            UserDefaults.standard.set(data, forKey: "meals")
-        } catch {
-            print(error)
+        Task {  // handle this async so UI can continue to work
+            do {
+                let storableMeals = try newValue.map(UserDefaultsMeal.init)
+                let data = try JSONEncoder().encode(storableMeals)
+                try data.write(to: Self.archiveURL)
+            } catch {
+                print(error)
+            }
         }
     }
 }

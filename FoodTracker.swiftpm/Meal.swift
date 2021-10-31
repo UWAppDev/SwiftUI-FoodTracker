@@ -18,6 +18,7 @@ import Foundation
 struct Meal: Equatable, Identifiable {
     // MARK: Properties
     #warning("TODO: TRY CONVERT TO LET CONSTANTS")
+    // NOTE: Using UUID allow us to have meals with the same name
     let id: UUID
     var name: String
     var photo: NativeImage?
