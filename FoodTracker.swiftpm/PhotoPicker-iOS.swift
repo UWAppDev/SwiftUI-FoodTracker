@@ -18,6 +18,21 @@ import PhotosUI
 import UniformTypeIdentifiers
 
 extension View {
+    /// Presents a system interface for allowing the user to import an existing
+    /// photo.
+    ///
+    /// In order for the interface to appear, `isPresented` must be `true`. When
+    /// the operation is finished, `isPresented` will be set to `false` before
+    /// `onCompletion` is called. If the user cancels the operation,
+    /// `isPresented` will be set to `false` and `onCompletion` will not be
+    /// called.
+    ///
+    /// - Parameters:
+    ///   - isPresented: A binding to whether the interface should be shown.
+    ///   - onCompletion: A callback that will be invoked when the operation has
+    ///     succeeded or failed.
+    ///   - result: A `Result` indicating whether the operation succeeded or
+    ///     failed.
     func photoImporter(
         isPresented: Binding<Bool>,
         onCompletion: @escaping (Result<URL, Error>) -> Void
@@ -31,16 +46,32 @@ extension View {
                 isPresented: isPresented,
                 configuration: configuration
             ) { result in
-                onCompletion(result.flatMap { urls in
-                    if let url = urls.first {
-                        return .success(url)
-                    }
-                    return .failure(CocoaError(.userCancelled))
-                })
+                onCompletion(result.map { $0.first! })
             }
         }
     }
     
+    /// Presents a system interface for allowing the user to import multiple
+    /// photos.
+    ///
+    /// In order for the interface to appear, `isPresented` must be `true`. When
+    /// the operation is finished, `isPresented` will be set to `false` before
+    /// `onCompletion` is called. If the user cancels the operation,
+    /// `isPresented` will be set to `false` and `onCompletion` will not be
+    /// called.
+    ///
+    /// - Note: Changing `allowsMultipleSelection`
+    ///   while the file importer is presented will have no immediate effect,
+    ///   however will apply the next time it is presented.
+    ///
+    /// - Parameters:
+    ///   - isPresented: A binding to whether the interface should be shown.
+    ///   - allowsMultipleSelection: Whether the importer allows the user to
+    ///     select more than one file to import.
+    ///   - onCompletion: A callback that will be invoked when the operation has
+    ///     succeeded or failed.
+    ///   - result: A `Result` indicating whether the operation succeeded or
+    ///     failed.
     func photoImporter(
         isPresented: Binding<Bool>,
         allowsMultipleSelection: Bool,
@@ -91,6 +122,10 @@ struct PhotoPicker: UIViewControllerRepresentable {
         
         func picker(_ picker: PHPickerViewController,
                     didFinishPicking results: [PHPickerResult]) {
+            guard !results.isEmpty else {
+                dismiss()
+                return
+            }
             Task {
                 do {
                     let images = try await imageURLs(from: results)
@@ -125,8 +160,12 @@ struct PhotoPicker: UIViewControllerRepresentable {
             }
         }
         
-        private func complete(with result: Result<[URL], Error>) {
+        private func dismiss() {
             coordinated.isPresented = false
+        }
+        
+        private func complete(with result: Result<[URL], Error>) {
+            dismiss()
             coordinated.onCompletion(result)
         }
     }

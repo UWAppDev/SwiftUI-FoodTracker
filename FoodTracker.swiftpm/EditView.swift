@@ -98,9 +98,15 @@ struct EditView: View {
 }
 
 struct EditView_Previews: PreviewProvider {
+    @State static var meal = Meal(
+        name: "Pasta with Meatballs But Long Name Is Very Long",
+        photo: #imageLiteral(resourceName: "meal3"),
+        rating: 3
+    )!
+    
     static var previews: some View {
         NavigationView {
-            EditView(meal: .constant(Meal(name: "Pasta with Meatballs But Long Name Is Very Long", photo: #imageLiteral(resourceName: "meal3"), rating: 3)!))
+            EditView(meal: $meal)
         }
     }
 }
