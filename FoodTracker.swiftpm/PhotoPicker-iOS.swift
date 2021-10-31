@@ -171,10 +171,23 @@ extension NSItemProvider {
             try await withCheckedThrowingContinuation { continuation in
                 // https://developer.apple.com/forums/thread/652496
                 loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
-                    if let error = error {
+                    guard let src = url else {
+                        return continuation.resume(throwing: error!)
+                    }
+                    do {
+                        // Because the src/url will be deleted once we return,
+                        // will copy the stored image to a different temp url.
+                        let dst = try FileManager.default.url(
+                            for: .itemReplacementDirectory, in: .userDomainMask,
+                            appropriateFor: src, create: true
+                        ).appendingPathComponent(src.lastPathComponent)
+                        if !FileManager.default.fileExists(atPath: dst.path) {
+                            try FileManager.default.copyItem(at: src, to: dst)
+                        }
+                        continuation.resume(returning: dst)
+                    } catch {
                         continuation.resume(throwing: error)
                     }
-                    continuation.resume(returning: url!)
                 }
             }
         }
@@ -195,7 +208,13 @@ struct PhotoPicker_Previews: PreviewProvider {
                 Text("Select Image")
             }
             
-            AsyncImage(url: url)
+            AsyncImage(url: url) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                EmptyView()
+            }
         }
         .photoImporter(isPresented: $showImagePicker) { result in
             switch result {
