@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+#warning("TODO: this is very close to MealEditor. Refactor")
 struct NewMealEditor: View {
     @EnvironmentObject var mealStore: MealStore
     @Environment(\.dismiss) var dismiss
