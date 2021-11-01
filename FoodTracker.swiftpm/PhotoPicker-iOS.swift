@@ -17,7 +17,7 @@ import SwiftUI
 import PhotosUI
 import UniformTypeIdentifiers
 
-extension View {
+public extension View {
     /// Presents a system interface for allowing the user to import an existing
     /// photo.
     ///
@@ -85,7 +85,7 @@ extension View {
 
 // Meet the new Photos picker
 // https://developer.apple.com/wwdc20/10652
-struct PhotoPicker: UIViewControllerRepresentable {
+fileprivate struct PhotoPicker: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
     let configuration: PHPickerConfiguration
     let onCompletion: (Result<[URL], Error>) -> Void
@@ -163,7 +163,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
     }
 }
 
-extension NSItemProvider {
+fileprivate extension NSItemProvider {
     // Meet async/await in Swift
     // https://developer.apple.com/wwdc21/10132/
     var imageFileURL: URL {
