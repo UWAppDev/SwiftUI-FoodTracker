@@ -17,12 +17,11 @@ import Foundation
 // NOTE: follow the original doc for how to implement this file step by step.
 struct Meal: Equatable, Identifiable {
     // MARK: Properties
-    #warning("TODO: TRY CONVERT TO LET CONSTANTS")
     // NOTE: Using UUID allow us to have meals with the same name
     let id: UUID
-    var name: String
-    var photo: NativeImage?
-    var rating: Int
+    let name: String
+    let photo: NativeImage?
+    let rating: Int
     
     // MARK: Initialization
     // NOTE: the `?` is added when compiler prompted to do so

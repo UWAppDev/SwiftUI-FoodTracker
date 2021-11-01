@@ -14,13 +14,13 @@
 
 import SwiftUI
 
-struct EditView: View {
+struct MealEditor: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var meal: Meal
-    @State var mealTitle: String = ""
-    @State var photo: NativeImage? = nil
-    @State var rating: Int = 0
+    @State private var mealTitle: String = ""
+    @State private var photo: NativeImage? = nil
+    @State private var rating: Int = 0
     
     var newMeal: Meal? {
         Meal(id: meal.id, name: mealTitle, photo: photo, rating: rating)
@@ -69,7 +69,7 @@ struct EditView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            EditView(meal: $meal)
+            MealEditor(meal: $meal)
         }
     }
 }

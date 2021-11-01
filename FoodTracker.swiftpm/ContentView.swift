@@ -27,7 +27,7 @@ struct ContentView: View {
             List {
                 ForEach($mealStore.meals) { $meal in
                     if query.isEmpty || meal.name.localizedCaseInsensitiveContains(query) {
-                        NavigationLink(destination: EditView(meal: $meal)) {
+                        NavigationLink(destination: MealEditor(meal: $meal)) {
                             // NOTE: command+click on HStack, then extract
                             MealDisplay(meal: meal)
                         }
@@ -47,7 +47,7 @@ struct ContentView: View {
                 }
                 .sheet(isPresented: $showingNewMealModal) {
                     NavigationView {
-                        NewMealModalView()
+                        NewMealEditor()
                     }
                 }
             }
@@ -94,65 +94,6 @@ struct MealDisplay: View {
         }
         .padding(.vertical, 8)
         .accessibilityElement(children: .combine)
-    }
-}
-
-struct NewMealModalView: View {
-    @EnvironmentObject var mealStore: MealStore
-    @Environment(\.dismiss) var dismiss
-    
-    @State var mealTitle: String = ""
-    @State var photo: NativeImage? = nil
-    @State var rating: Int = 0
-    
-    var newMeal: Meal? {
-        Meal(name: mealTitle, photo: photo, rating: rating)
-    }
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            TextField("Meal Name", text: $mealTitle)
-                .textFieldStyle(.roundedBorder)
-            
-            StarRating(title: Text("rating"), value: $rating)
-            
-            ImagePicker(selectedPhoto: $photo)
-        }
-        .padding()
-        .navigationTitle(mealTitle.isEmpty ? "New Meal" : mealTitle)
-        .toolbar {
-            #if os(iOS)
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                Button {
-                    // this is already handled on macOS.
-                    // calling dismiss will actually close the app :(
-                    dismiss()
-                } label: {
-                    Text("Cancel")
-                        .foregroundColor(.red)
-                }
-            }
-            #endif
-
-            #if os(iOS)
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    mealStore.meals.append(newMeal!)
-                } label: {
-                    Text("Save")
-                }
-                .disabled(newMeal == nil)
-            }
-            #else
-            Button {
-                mealStore.meals.append(newMeal!)
-            } label: {
-                Text("Save")
-            }
-            .disabled(newMeal == nil)
-            #endif
-            
-        }
     }
 }
 
