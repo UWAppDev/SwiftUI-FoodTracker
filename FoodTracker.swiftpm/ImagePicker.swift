@@ -13,6 +13,7 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
+import PhotoPicker
 
 struct ImagePicker: View {
     @Binding var selectedPhoto: NativeImage?

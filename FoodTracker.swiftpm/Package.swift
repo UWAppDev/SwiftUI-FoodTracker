@@ -34,9 +34,15 @@ let package = Package(
             ]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/UWAppDev/SwiftUI-PhotoPicker.git", .branch("main"))
+    ],
     targets: [
         .executableTarget(
             name: "AppModule",
+            dependencies: [
+                .product(name: "PhotoPicker", package: "swiftui-photopicker")
+            ],
             path: "."
         )
     ]

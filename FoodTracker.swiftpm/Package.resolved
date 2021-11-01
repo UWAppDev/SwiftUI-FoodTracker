@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftUI-PhotoPicker",
+        "repositoryURL": "https://github.com/UWAppDev/SwiftUI-PhotoPicker.git",
+        "state": {
+          "branch": "main",
+          "revision": "a856da45a18bcfbbc410b5ff38351cffb8b834f9",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -116,36 +116,42 @@ struct NewMealModalView: View {
             
             StarRating(title: Text("rating"), value: $rating)
             
-            ImagePicker(photo: $photo)
+            ImagePicker(selectedPhoto: $photo)
         }
         .padding()
         .navigationTitle(mealTitle.isEmpty ? "New Meal" : mealTitle)
         .toolbar {
+            #if os(iOS)
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button {
-                    #if os(iOS)
                     // this is already handled on macOS.
                     // calling dismiss will actually close the app :(
                     dismiss()
-                    #endif
                 } label: {
                     Text("Cancel")
                         .foregroundColor(.red)
                 }
             }
+            #endif
+
+            #if os(iOS)
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
                     mealStore.meals.append(newMeal!)
-                    #if os(iOS)
-                    // this is already handled on macOS.
-                    // calling dismiss will actually close the app :(
-                    dismiss()
-                    #endif
                 } label: {
                     Text("Save")
                 }
                 .disabled(newMeal == nil)
             }
+            #else
+            Button {
+                mealStore.meals.append(newMeal!)
+            } label: {
+                Text("Save")
+            }
+            .disabled(newMeal == nil)
+            #endif
+            
         }
     }
 }
