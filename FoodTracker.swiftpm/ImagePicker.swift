@@ -14,13 +14,13 @@
 
 import SwiftUI
 
-struct ImageView: View {
-    @Binding var photo: NativeImage?
-    @Binding var showPhotoPicker: Bool
+struct ImagePicker: View {
+    @Binding var selectedPhoto: NativeImage?
+    @State var showPhotoPicker: Bool = false
     
     var body: some View {
         Group {
-            if let photo = photo {
+            if let photo = selectedPhoto {
                 Button {
                     showPhotoPicker = true
                 } label: {
@@ -49,14 +49,14 @@ struct ImageView: View {
                     guard let image = NativeImage(data: data) else {
                         throw CocoaError(.coderInvalidValue)
                     }
-                    photo = image
+                    selectedPhoto = image
                 } catch {
                     print(error)
-                    photo = nil
+                    selectedPhoto = nil
                 }
             case .failure(let error):
                 print(error)
-                photo = nil
+                selectedPhoto = nil
             }
         }
     }
@@ -64,6 +64,6 @@ struct ImageView: View {
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageView(photo: .constant(nil), showPhotoPicker: .constant(true))
+        ImagePicker(selectedPhoto: .constant(nil))
     }
 }

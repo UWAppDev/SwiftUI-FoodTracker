@@ -59,7 +59,7 @@ struct ContentView: View {
 // NOTE: extracted
 struct MealDisplay: View {
     let meal: Meal
-
+    
     var body: some View {
         HStack(spacing: 16) {
             // NOTE: Group is added so we can apply `.frame` on either Image
@@ -104,10 +104,9 @@ struct NewMealModalView: View {
     @State var mealTitle: String = ""
     @State var photo: NativeImage? = nil
     @State var rating: Int = 0
-    @State var showPhotoPicker: Bool = false
     
     var newMeal: Meal? {
-        Meal(id: UUID(), name: mealTitle, photo: photo, rating: rating)
+        Meal(name: mealTitle, photo: photo, rating: rating)
     }
     
     var body: some View {
@@ -117,18 +116,17 @@ struct NewMealModalView: View {
             
             StarRating(title: Text("rating"), value: $rating)
             
-            ImageView(photo: $photo, showPhotoPicker: $showPhotoPicker)
+            ImagePicker(photo: $photo)
         }
         .padding()
         .navigationTitle(mealTitle.isEmpty ? "New Meal" : mealTitle)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button {
-                    //showingNewMealModal = false
                     #if os(iOS)
-                        // this is already handled on macOS.
-                        // calling dismiss will actually close the app :(
-                        dismiss()
+                    // this is already handled on macOS.
+                    // calling dismiss will actually close the app :(
+                    dismiss()
                     #endif
                 } label: {
                     Text("Cancel")
@@ -137,16 +135,16 @@ struct NewMealModalView: View {
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
-                    #if os(iOS)
-                        // this is already handled on macOS.
-                        // calling dismiss will actually close the app :(
-                        dismiss()
-                    #endif
                     mealStore.meals.append(newMeal!)
+                    #if os(iOS)
+                    // this is already handled on macOS.
+                    // calling dismiss will actually close the app :(
+                    dismiss()
+                    #endif
                 } label: {
                     Text("Save")
                 }
-                .disabled(mealTitle.isEmpty)
+                .disabled(newMeal == nil)
             }
         }
     }

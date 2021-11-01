@@ -21,7 +21,6 @@ struct EditView: View {
     @State var mealTitle: String = ""
     @State var photo: NativeImage? = nil
     @State var rating: Int = 0
-    @State var showPhotoPicker: Bool = false
     
     var newMeal: Meal? {
         Meal(id: meal.id, name: mealTitle, photo: photo, rating: rating)
@@ -35,7 +34,7 @@ struct EditView: View {
                 
                 StarRating(title: Text("rating"), value: $rating)
                 
-                ImageView(photo: $photo, showPhotoPicker: $showPhotoPicker)
+                ImagePicker(selectedPhoto: $photo)
             }
             .padding()
         }
