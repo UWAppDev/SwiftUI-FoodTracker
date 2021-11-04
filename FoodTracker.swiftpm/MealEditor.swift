@@ -34,7 +34,7 @@ struct MealEditor: View {
                 
                 StarRating(title: Text("rating"), value: $rating)
                 
-                ImagePicker(selectedPhoto: $photo)
+                PhotoPicker(selectedPhoto: $photo)
             }
             .padding()
         }

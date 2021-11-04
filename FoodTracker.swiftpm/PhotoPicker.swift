@@ -13,9 +13,9 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import PhotoPicker
+import MediaPicker
 
-struct ImagePicker: View {
+struct PhotoPicker: View {
     @Binding var selectedPhoto: NativeImage?
     @State var showPhotoPicker: Bool = false
     
@@ -42,7 +42,8 @@ struct ImagePicker: View {
                 }
             }
         }
-        .photoImporter(isPresented: $showPhotoPicker) { result in
+        .mediaImporter(isPresented: $showPhotoPicker,
+                       allowedMediaTypes: .images) { result in
             switch result {
             case .success(let url):
                 do {
@@ -65,6 +66,6 @@ struct ImagePicker: View {
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImagePicker(selectedPhoto: .constant(nil))
+        PhotoPicker(selectedPhoto: .constant(nil))
     }
 }

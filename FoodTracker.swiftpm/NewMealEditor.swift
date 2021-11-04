@@ -28,7 +28,7 @@ struct NewMealEditor: View {
             
             StarRating(title: Text("rating"), value: $rating)
             
-            ImagePicker(selectedPhoto: $photo)
+            PhotoPicker(selectedPhoto: $photo)
         }
         .padding()
         .navigationTitle(mealTitle.isEmpty ? "New Meal" : mealTitle)

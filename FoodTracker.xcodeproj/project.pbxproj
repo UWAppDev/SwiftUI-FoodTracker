@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		A060B525272D39AD00EABD0A /* MealEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060B524272D39AD00EABD0A /* MealEditor.swift */; };
 		A060B526272D39AD00EABD0A /* MealEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060B524272D39AD00EABD0A /* MealEditor.swift */; };
-		A0D10E39272F2951005FA0D6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D10E38272F2951005FA0D6 /* ImagePicker.swift */; };
-		A0D10E3A272F2956005FA0D6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D10E38272F2951005FA0D6 /* ImagePicker.swift */; };
+		A0D10E39272F2951005FA0D6 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D10E38272F2951005FA0D6 /* PhotoPicker.swift */; };
+		A0D10E3A272F2956005FA0D6 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D10E38272F2951005FA0D6 /* PhotoPicker.swift */; };
+		D204998E27335A6C0001264D /* MediaPicker in Frameworks */ = {isa = PBXBuildFile; productRef = D204998D27335A6C0001264D /* MediaPicker */; };
+		D204999027335A790001264D /* MediaPicker in Frameworks */ = {isa = PBXBuildFile; productRef = D204998F27335A790001264D /* MediaPicker */; };
 		D235695C26FC41E200284277 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235695B26FC41E200284277 /* StarRating.swift */; };
 		D235695D26FC41E200284277 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235695B26FC41E200284277 /* StarRating.swift */; };
-		D2600BCD2730A7FC00C62C5D /* PhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = D2600BCC2730A7FC00C62C5D /* PhotoPicker */; };
-		D2600BD02730A80C00C62C5D /* PhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = D2600BCF2730A80C00C62C5D /* PhotoPicker */; };
 		D2600BD22730AA0100C62C5D /* NewMealEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2600BD12730AA0100C62C5D /* NewMealEditor.swift */; };
 		D2600BD32730AA0100C62C5D /* NewMealEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2600BD12730AA0100C62C5D /* NewMealEditor.swift */; };
 		D29F5E8D272D26BD001F94D0 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F5E8C272D26BD001F94D0 /* Meal.swift */; };
@@ -52,7 +52,7 @@
 
 /* Begin PBXFileReference section */
 		A060B524272D39AD00EABD0A /* MealEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEditor.swift; sourceTree = "<group>"; };
-		A0D10E38272F2951005FA0D6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		A0D10E38272F2951005FA0D6 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		D21B587227004C0800CF778A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D21B587327004C0800CF778A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D235695B26FC41E200284277 /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2600BCD2730A7FC00C62C5D /* PhotoPicker in Frameworks */,
+				D204998E27335A6C0001264D /* MediaPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2600BD02730A80C00C62C5D /* PhotoPicker in Frameworks */,
+				D204999027335A790001264D /* MediaPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +136,7 @@
 			children = (
 				F7EED2F326FC2F35001EA317 /* FoodTrackerApp.swift */,
 				F7EED2F426FC2F35001EA317 /* ContentView.swift */,
-				A0D10E38272F2951005FA0D6 /* ImagePicker.swift */,
+				A0D10E38272F2951005FA0D6 /* PhotoPicker.swift */,
 				A060B524272D39AD00EABD0A /* MealEditor.swift */,
 				D2600BD12730AA0100C62C5D /* NewMealEditor.swift */,
 				D235695B26FC41E200284277 /* StarRating.swift */,
@@ -212,7 +212,7 @@
 			);
 			name = "FoodTracker (iOS)";
 			packageProductDependencies = (
-				D2600BCC2730A7FC00C62C5D /* PhotoPicker */,
+				D204998D27335A6C0001264D /* MediaPicker */,
 			);
 			productName = "FoodTracker (iOS)";
 			productReference = F7EED2FA26FC2F36001EA317 /* FoodTracker.app */;
@@ -232,7 +232,7 @@
 			);
 			name = "FoodTracker (macOS)";
 			packageProductDependencies = (
-				D2600BCF2730A80C00C62C5D /* PhotoPicker */,
+				D204998F27335A790001264D /* MediaPicker */,
 			);
 			productName = "FoodTracker (macOS)";
 			productReference = F7EED30026FC2F36001EA317 /* FoodTracker.app */;
@@ -275,7 +275,7 @@
 			);
 			mainGroup = F7EED2ED26FC2F35001EA317;
 			packageReferences = (
-				D2600BCB2730A7FC00C62C5D /* XCRemoteSwiftPackageReference "SwiftUI-PhotoPicker" */,
+				D204998C27335A6C0001264D /* XCRemoteSwiftPackageReference "SwiftUI-MediaPicker" */,
 			);
 			productRefGroup = F7EED2FB26FC2F36001EA317 /* Products */;
 			projectDirPath = "";
@@ -349,7 +349,7 @@
 				A060B525272D39AD00EABD0A /* MealEditor.swift in Sources */,
 				F7EED30126FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
 				D2F86DF7272DD82000533647 /* MealStore.swift in Sources */,
-				A0D10E3A272F2956005FA0D6 /* ImagePicker.swift in Sources */,
+				A0D10E3A272F2956005FA0D6 /* PhotoPicker.swift in Sources */,
 				D29F5EAB272D3367001F94D0 /* NativeImage.swift in Sources */,
 				D235695C26FC41E200284277 /* StarRating.swift in Sources */,
 			);
@@ -365,7 +365,7 @@
 				A060B526272D39AD00EABD0A /* MealEditor.swift in Sources */,
 				F7EED30226FC2F36001EA317 /* FoodTrackerApp.swift in Sources */,
 				D2F86DF8272DD82000533647 /* MealStore.swift in Sources */,
-				A0D10E39272F2951005FA0D6 /* ImagePicker.swift in Sources */,
+				A0D10E39272F2951005FA0D6 /* PhotoPicker.swift in Sources */,
 				D29F5EAC272D3367001F94D0 /* NativeImage.swift in Sources */,
 				D235695D26FC41E200284277 /* StarRating.swift in Sources */,
 			);
@@ -751,9 +751,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D2600BCB2730A7FC00C62C5D /* XCRemoteSwiftPackageReference "SwiftUI-PhotoPicker" */ = {
+		D204998C27335A6C0001264D /* XCRemoteSwiftPackageReference "SwiftUI-MediaPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/UWAppDev/SwiftUI-PhotoPicker.git";
+			repositoryURL = "https://github.com/UWAppDev/SwiftUI-MediaPicker.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -762,15 +762,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D2600BCC2730A7FC00C62C5D /* PhotoPicker */ = {
+		D204998D27335A6C0001264D /* MediaPicker */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2600BCB2730A7FC00C62C5D /* XCRemoteSwiftPackageReference "SwiftUI-PhotoPicker" */;
-			productName = PhotoPicker;
+			package = D204998C27335A6C0001264D /* XCRemoteSwiftPackageReference "SwiftUI-MediaPicker" */;
+			productName = MediaPicker;
 		};
-		D2600BCF2730A80C00C62C5D /* PhotoPicker */ = {
+		D204998F27335A790001264D /* MediaPicker */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2600BCB2730A7FC00C62C5D /* XCRemoteSwiftPackageReference "SwiftUI-PhotoPicker" */;
-			productName = PhotoPicker;
+			package = D204998C27335A6C0001264D /* XCRemoteSwiftPackageReference "SwiftUI-MediaPicker" */;
+			productName = MediaPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

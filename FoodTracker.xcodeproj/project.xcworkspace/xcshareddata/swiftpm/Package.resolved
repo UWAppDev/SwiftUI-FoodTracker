@@ -2,11 +2,11 @@
   "object": {
     "pins": [
       {
-        "package": "SwiftUI-PhotoPicker",
-        "repositoryURL": "https://github.com/UWAppDev/SwiftUI-PhotoPicker.git",
+        "package": "SwiftUI-MediaPicker",
+        "repositoryURL": "https://github.com/UWAppDev/SwiftUI-MediaPicker.git",
         "state": {
           "branch": "main",
-          "revision": "a856da45a18bcfbbc410b5ff38351cffb8b834f9",
+          "revision": "b1edb0d844f37d5e9a584a2ff4c89ec561b295bc",
           "version": null
         }
       }
