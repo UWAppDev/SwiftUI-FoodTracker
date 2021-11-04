@@ -46,9 +46,13 @@ struct ContentView: View {
                     Label("Add meal", systemImage: "plus")
                 }
                 .sheet(isPresented: $showingNewMealModal) {
+                    #if os(iOS)
                     NavigationView {
                         NewMealEditor()
                     }
+                    #else
+                    NewMealEditor()
+                    #endif
                 }
             }
             Text("Select a meal to view details")

@@ -33,8 +33,7 @@ struct NewMealEditor: View {
         .padding()
         .navigationTitle(mealTitle.isEmpty ? "New Meal" : mealTitle)
         .toolbar {
-            #if os(iOS)
-            ToolbarItemGroup(placement: .navigationBarLeading) {
+            ToolbarItemGroup(placement: .cancellationAction) {
                 Button {
                     // this is already handled on macOS.
                     // calling dismiss will actually close the app :(
@@ -44,26 +43,16 @@ struct NewMealEditor: View {
                         .foregroundColor(.red)
                 }
             }
-            #endif
 
-            #if os(iOS)
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
+            ToolbarItemGroup(placement: .confirmationAction) {
                 Button {
                     mealStore.meals.append(newMeal!)
+                    dismiss()
                 } label: {
                     Text("Save")
                 }
                 .disabled(newMeal == nil)
             }
-            #else
-            Button {
-                mealStore.meals.append(newMeal!)
-            } label: {
-                Text("Save")
-            }
-            .disabled(newMeal == nil)
-            #endif
-            
         }
     }
 }
